@@ -1,0 +1,70 @@
+<!-- left padding -->
+<div class="col-md-2">
+    <h3>Menu</h3>
+</div>
+
+<!-- main content container -->
+<div class="col-md-10">
+
+    <!-- top title -->
+    <div class="col-md-10">
+        <h2><%= @welcome %></h2>
+    </div>
+
+    <hr>
+
+    <!-- top banner ad -->
+    <div class="col-md-10">
+        <h2>Ad Here</h2>
+    </div>
+
+    <hr>
+
+    <!-- input form -->
+    <div class="col-md-10">
+        <h4>Upload Form Here</h4>
+    </div>
+
+    <hr>
+
+    <!-- node selector -->
+    <div class="col-md-10">
+        <p>node selector</p>
+    </div>
+
+    <!-- nodes -->
+    <div class="col-md-10">
+        <% nodes.each do |node| %>
+          <br>
+          <table>
+              <tr>
+                  <td class="nodeName">Name</td>
+                  <td><%= node.name %></td>
+              </tr>
+              <tr>
+                  <td class="nodeName">Biome</td>
+                  <td><%= node.biome %></td>
+              </tr>
+              <tr>
+                  <td class="nodeName">Populated?</td>
+                  <td><%= node.fully_generated? %></td>
+              </tr>
+              <tr>
+                  <td class="nodeName">Position</td>
+                  <td>(x: <%= node.position.x %>, y: <%= node.position.x %>, y: <%= node.position.z %>)</td>
+              </tr>
+          </table>
+          <p class="typeName">Node Objects</p>
+          <table>
+              <% node.objects.each do |object| %>
+                <tr>
+                    <td class="objectKey">Object[<%= object.id %>]</td>
+                    <td><%= object.name %></td>
+                </tr>
+              <% end %>
+          </table>
+
+        <% end %>
+    </div>
+
+</div>
