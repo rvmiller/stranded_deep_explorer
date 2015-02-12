@@ -25,7 +25,6 @@ module SFE
 
     def get_nodes(tgd)
       nodes = Array.new
-      id = 0
 
       parse_nodes(tgd).each do |node_key, node_data|
         nodes << SFE::Node.new(node_data)
