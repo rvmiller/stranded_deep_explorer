@@ -1,0 +1,70 @@
+<hr>
+
+<!-- node selector -->
+<div class="col-md-12">
+    <h3>Explore your node data</h3>
+    <hr>
+</div>
+
+<!-- nodes -->
+<% node_id = 0 %>
+<div class="container">
+  <% nodes.each do |node| %>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <table>
+          <tbody>
+            <tr>
+              <td class="nodeName">Name</td>
+              <td><%= node.name %></td>
+            </tr>
+            <tr>
+              <td class="nodeName">Biome</td>
+              <td><%= node.biome %></td>
+            </tr>
+            <tr>
+              <td class="nodeName">Populated?</td>
+              <td><%= node.fully_generated? %></td>
+            </tr>
+            <tr>
+              <td class="nodeName">Position</td>
+              <td>(x: <%= node.position.x %>, y: <%= node.position.x %>, y: <%= node.position.z %>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="panel-group" id="accordion<%= node_id %>">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion<%= node_id %>" href="#collapse<%= node_id %>">Node Objects</a>
+              </h4>
+            </div>
+            <div id="collapse<%= node_id %>" class="panel-collapse collapse">
+              <div class="panel-body">
+                <table>
+                  <tbody>
+                  <% node.objects.each do |object| %>
+                    <tr>
+                      <td class="objectKey">Object[<%= object.id %>]</td>
+                      <td><%= object.name %></td>
+                    </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% node_id += 1 %>
+      <div class="col-md-6"></div>
+    </div>
+    <hr>
+  <% end %>
+</div>

@@ -16,17 +16,24 @@ module SFE
       end
 
       # TODO: take save file as input
-      def parse
-        get_persistent_world
+      def parse(file)
+        # I don't love this kind of type ambiguity. Should refactor.
+        #if file.nil? or file == :sample
+        #  get_persistent_world(sample_save_file)
+        #else
+        #  get_persistent_world(file)
+        #end
+        get_persistent_world(file)
       end
 
       # TODO: nullsafe
-      def get_persistent_world
-        parse_sample_save_file.fetch("Persistent")
+      def get_persistent_world(save_file)
+        return Hash.new if save_file.nil?
+        parse_save_file(save_file).fetch("Persistent")
       end
 
-      def parse_sample_save_file
-        JSON.parse(sample_save_file)
+      def parse_save_file(save_file)
+        JSON.parse(save_file.read)
       end
 
       def sample_save_file
