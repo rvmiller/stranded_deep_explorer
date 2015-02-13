@@ -1,23 +1,27 @@
-class InvalidCoordinateFormatException < RuntimeError; end
+module SFE
+  class InvalidCoordinateFormatException < RuntimeError; end
 
-class SFE::Position
-  attr_reader :x, :y, :z, :w
+  class Position < AbstractObject
+    attr_reader :data, :x, :y, :z, :w
 
-  def initialize(coords)
-    validate(coords)
-    @x = coords.fetch("x")
-    @y = coords.fetch("y")
-    @z = coords.fetch("z")
-    @w = coords.fetch("w", nil)
-  end
+    def initialize(position_data)
+      @data = position_data
 
-  private
-  def validate(coords)
-    unless coords.is_a?(Hash) and coords.has_key?("x") and coords.has_key?("y") and coords.has_key?("z")
-      raise InvalidCoordinateFormatException.new("Expected a hash of xyz coordinates")
+      @x = get_position("x")
+      @y = get_position("y")
+      @z = get_position("z")
+      @w = get_position("w")
     end
 
-    return "coordinates ok"
+    private
+    def get_position(axis)
+      fetch axis, :from => data, :default => default_position
+    end
+
+    def default_position
+      '?'
+    end
+
   end
 
 end

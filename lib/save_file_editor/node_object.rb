@@ -34,6 +34,10 @@ module SFE
     end
 
     def get_transform(object_data)
+      SFE::Transform.new(get_transform_data(object_data))
+    end
+
+    def get_transform_data(object_data)
       fetch "Transform", :from => object_data, :default => {}
     end
 

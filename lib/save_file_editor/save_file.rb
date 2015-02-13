@@ -11,10 +11,6 @@ module SFE
       @data ||= SFE::Parser.parse(file)
     end
 
-    def clear
-      @data = Hash.new
-    end
-
   end
 
 end
